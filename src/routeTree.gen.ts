@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CartasRouteImport } from './routes/cartas'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as TiragensRouteImport } from './routes/tiragens'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CartasRoute = CartasRouteImport.update({
+  id: '/cartas',
+  path: '/cartas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TiragensRoute = TiragensRouteImport.update({
+  id: '/tiragens',
+  path: '/tiragens',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cartas': typeof CartasRoute
+  '/quiz': typeof QuizRoute
+  '/tiragens': typeof TiragensRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cartas': typeof CartasRoute
+  '/quiz': typeof QuizRoute
+  '/tiragens': typeof TiragensRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cartas': typeof CartasRoute
+  '/quiz': typeof QuizRoute
+  '/tiragens': typeof TiragensRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/cartas' | '/quiz' | '/tiragens'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/cartas' | '/quiz' | '/tiragens'
+  id: '__root__' | '/' | '/cartas' | '/quiz' | '/tiragens'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CartasRoute: typeof CartasRoute
+  QuizRoute: typeof QuizRoute
+  TiragensRoute: typeof TiragensRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cartas': {
+      id: '/cartas'
+      path: '/cartas'
+      fullPath: '/cartas'
+      preLoaderRoute: typeof CartasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tiragens': {
+      id: '/tiragens'
+      path: '/tiragens'
+      fullPath: '/tiragens'
+      preLoaderRoute: typeof TiragensRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CartasRoute: CartasRoute,
+  QuizRoute: QuizRoute,
+  TiragensRoute: TiragensRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
