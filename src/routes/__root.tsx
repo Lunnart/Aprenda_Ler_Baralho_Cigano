@@ -130,8 +130,32 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  const navLink =
+    "rounded-full px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground [&.active]:bg-secondary [&.active]:text-primary";
+
   return (
     <QueryClientProvider client={queryClient}>
+      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur">
+        <nav className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3">
+          <Link to="/" className="font-display text-xl font-semibold text-primary">
+            ✦ Cigano
+          </Link>
+          <div className="flex items-center gap-1">
+            <Link to="/" className={navLink} activeOptions={{ exact: true }}>
+              Início
+            </Link>
+            <Link to="/cartas" className={navLink}>
+              Cartas
+            </Link>
+            <Link to="/tiragens" className={navLink}>
+              Tiragens
+            </Link>
+            <Link to="/quiz" className={navLink}>
+              Quiz
+            </Link>
+          </div>
+        </nav>
+      </header>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>
