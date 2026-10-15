@@ -34,7 +34,7 @@ function shuffle<T>(arr: T[]): T[] {
   const copy = [...arr];
   for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
+    [copy[i], copy[j]] = [copy[j]!, copy[i]!];
   }
   return copy;
 }
@@ -64,7 +64,7 @@ function Quiz() {
   const [picked, setPicked] = useState<string | null>(null);
   const [finished, setFinished] = useState(false);
 
-  const question = questions[current];
+  const question = questions[current]!;
 
   const progress = useMemo(
     () => Math.round(((finished ? TOTAL : current) / TOTAL) * 100),
